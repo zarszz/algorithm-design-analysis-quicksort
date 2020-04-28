@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Implementasi quicksort</title>
+    <link rel="stylesheet" href="./assets/bulma/css/bulma.min.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title has-text-centered">Aplikasi quicksort dengan mengunakan JavaScript</h1>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">Masukkan angka</label>
+            </div>
+            <div class="field-body">
+                <div class="field has-addons">
+                    <p class="control">
+                        <input class="input" type="number" id="inputArrayValue" />
+                    </p>
+                    <p class="control">
+                        <a class="button" onclick="handleInsert()">
+                            Insert
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Array saat ini</label>
+            </div>
+            <div class="field-body">
+                <input class="input" type="text" name="currentArray" id="currentArray" value="" disabled></input>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Setelah sorting</label>
+            </div>
+            <div class="field-body">
+                <input class="input" type="text" name="sortedArray" id="sortedArray" value="" disabled></input>
+            </div>
+        </div>
+        <a class="button" onclick="handleRandomInsert()">Random Array</a>
+        <a class="button" onclick="handleReset()">Reset data</a>
+        <a class="button" onclick="handleSort()">Sort</a>
+    </div>
+    <script>
+        var array_value = [];
+
+        function handleInsert() {
+            array_value.push(parseInt(document.getElementById("inputArrayValue").value));
+            document.getElementById("currentArray").value = "[" + array_value + "]";
+            document.getElementById("inputArrayValue").value = "";
+        }
+
+        function handleReset() {
+            array_value = [];
+            document.getElementById("sortedArray").value = "";
+            document.getElementById("currentArray").value = "";
+        }
+
+        function handleRandomInsert() {
+            array_value = [];
+            const rand_length = Math.floor((Math.random() * 20) + 1);
+            for(let i = 0; i < rand_length; i++){
+                array_value.push(Math.floor(Math.random() * Math.floor(300)));
+            }
+            document.getElementById("currentArray").value = "[" + array_value + "]";
+        }
+
+        function quickSort(arr, left, right) {
+            var len = arr.length,
+                pivot,
+                partitionIndex;
+
+            if (left < right) {
+                pivot = right;
+                partitionIndex = partition(arr, pivot, left, right);
+
+                quickSort(arr, left, partitionIndex - 1);
+                quickSort(arr, partitionIndex + 1, right);
+            }
+            return arr;
+        }
+
+        function partition(arr, pivot, left, right) {
+            var pivotValue = arr[pivot],
+                partitionIndex = left;
+
+            for (var i = left; i < right; i++) {
+                if (arr[i] < pivotValue) {
+                    swap(arr, i, partitionIndex);
+                    partitionIndex++;
+                }
+            }
+            swap(arr, right, partitionIndex);
+            return partitionIndex;
+        }
+
+        function swap(arr, i, j) {
+            var temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+
+        function handleSort() {
+            if (array_value.length > 0) {
+                const res = quickSort(array_value, 0, array_value.length - 1);
+                document.getElementById("sortedArray").value = res;
+            }
+        }
+    </script>
+</body>
+
+</html>
