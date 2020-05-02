@@ -3,18 +3,18 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Implementasi quicksort</title>
+    <title>Quicksort Implementation</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <h1 class="title has-text-centered">Aplikasi quicksort dengan mengunakan JavaScript</h1>
+        <h1 class="title has-text-centered">Quicksort Application with JavaScript</h1>
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Masukkan angka</label>
+                <label class="label">Enter a number</label>
             </div>
             <div class="field-body">
                 <div class="field has-addons">
@@ -31,7 +31,7 @@
         </div>
         <div class="field is-horizontal">
             <div class="field-label is-normal">
-                <label class="label">Array saat ini</label>
+                <label class="label">Current array</label>
             </div>
             <div class="field-body">
                 <input class="input" type="text" name="currentArray" id="currentArray" value="" disabled></input>
@@ -39,7 +39,7 @@
         </div>
         <div class="field is-horizontal">
             <div class="field-label is-normal">
-                <label class="label">Setelah sorting</label>
+                <label class="label">After sorting</label>
             </div>
             <div class="field-body">
                 <input class="input" type="text" name="sortedArray" id="sortedArray" value="" disabled></input>
@@ -56,6 +56,7 @@
             array_value.push(parseInt(document.getElementById("inputArrayValue").value));
             document.getElementById("currentArray").value = "[" + array_value + "]";
             document.getElementById("inputArrayValue").value = "";
+            document.getElementById("inputArrayValue").focus();
         }
 
         function handleReset() {
